@@ -1,0 +1,291 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>try mo nga this..</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      /* Global Styles */
+      * { box-sizing: border-box; margin:0; padding:0; font-family: 'Poppins', sans-serif; }
+      body, html { width:100%; height:100%; background: linear-gradient(135deg, #5DADE2, #F1948A); overflow-x:hidden; }
+
+      .container { display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center; color:white; padding:20px; }
+
+      button { padding:15px 30px; font-size:1.2rem; font-weight:600; border:none; border-radius:50px; cursor:pointer; margin:10px;
+        transition: all 0.3s ease; background: linear-gradient(135deg, #5DADE2, #F1948A); color:white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+      button:hover { transform: scale(1.1); box-shadow:0 10px 20px rgba(0,0,0,0.4); }
+
+      .hidden { display:none; }
+
+      /* Chat Bubble Styles */
+      .chat-container { width:90%; max-width:500px; margin:auto; display:flex; flex-direction:column; gap:10px; }
+      .blue-bubble, .pink-bubble { padding:15px 20px; border-radius:20px; max-width:80%; word-wrap:break-word; }
+      .blue-bubble { align-self:flex-start; background:#5DADE2; color:white; }
+      .pink-bubble { align-self:flex-end; background:#F1948A; color:white; }
+
+      /* Heart Button */
+      .heart-btn { background:#FF6B81; border-radius:50%; width:60px; height:60px; font-size:1.5rem; display:flex; justify-content:center; align-items:center; box-shadow:0 5px 15px rgba(0,0,0,0.3); margin-top:20px; transition: all 0.3s ease; }
+      .heart-btn:hover { transform: scale(1.2); box-shadow:0 10px 20px rgba(0,0,0,0.4); }
+
+      /* Calendar cards */
+      .calendar { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:30px; }
+      .card { background:white; color:black; padding:15px 20px; border-radius:15px; width:150px; text-align:center; cursor:pointer; transition: all 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+      .card:hover { transform: scale(1.05); background: linear-gradient(135deg, #5DADE2, #F1948A); color:white; }
+      .chat-container {
+      max-width: 380px;
+      height: 420px;
+      margin: 0 auto;
+      background: #ffeaf3;
+      border-radius: 25px;
+      padding: 15px;
+      overflow-y: auto;
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+  }
+
+  /* Common bubble style */
+  .chat-bubble {
+      max-width: 75%;
+      padding: 12px 16px;
+      margin: 8px 0;
+      border-radius: 18px;
+      font-size: 15px;
+      line-height: 1.4;
+      animation: popIn 0.3s ease;
+  }
+
+  /* Blue (left) */
+  .blue-bubble {
+      background: #cce6ff;
+      color: #003366;
+      align-self: flex-start;
+      border-bottom-left-radius: 5px;
+  }
+
+  /* Pink (right) */
+  .pink-bubble {
+      background: #ffb6d5;
+      color: #7a003c;
+      align-self: flex-end;
+      border-bottom-right-radius: 5px;
+      margin-left: auto;
+  }
+
+  /* Buttons */
+  .reply-buttons button {
+      margin: 10px;
+      padding: 12px 24px;
+      border-radius: 50px;
+      background: #ff66aa;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+  }
+
+  @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+  }
+
+    </style>
+  </head>
+  <body>
+
+    <!-- HOME PAGE -->    
+    <div id="home" class="container">
+      <h1>Hiii sentimental sassy girly true friend joker ultra galactic mechanic, soft girl, ulirang kaibigan theuniverse loveylady 💖
+          Hahahaaha…  💖</h1>
+      <button onclick="goToAsking()">Start ❤️</button>
+    </div>
+
+    <!-- ASKING PAGE -->
+<div id="asking" class="container hidden">
+  <h2>I know we’re both busy on Heartday…</h2>
+  <h2>But… can you play this game first</h2>
+  <button onclick="window.location.href='heartmeter.html'">Yes 💖</button>
+  <button id="noBtn">No 💔</button>
+</div>
+
+<script>
+const noBtn = document.getElementById('noBtn');
+
+// Make the No button move randomly when hovered
+noBtn.addEventListener('mouseenter', () => {
+    const container = document.getElementById('asking');
+    const containerRect = container.getBoundingClientRect();
+    
+    // Calculate random position inside container
+    const maxX = containerRect.width - noBtn.offsetWidth;
+    const maxY = containerRect.height - noBtn.offsetHeight;
+    
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = randomX + 'px';
+    noBtn.style.top = randomY + 'px';
+});
+</script>
+
+
+    </div>
+
+
+
+  <style>
+    .note-box {
+      position: fixed;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #F1948A, #5DADE2);
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      color: white;
+      width: 300px;
+      text-align: center;
+      animation: popIn 0.3s ease forwards;
+      z-index: 10;
+    }
+
+    .note-box button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border:none;
+      border-radius: 10px;
+      background:white;
+      color:#F1948A;
+      font-weight:600;
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+
+    .note-box button:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes popIn {
+      0% { transform: translateX(-50%) translateY(50px); opacity:0; }
+      100% { transform: translateX(-50%) translateY(0); opacity:1; }
+    }
+    .hidden {
+    display: none;
+  }
+
+  .note-actions {
+    margin-top: 12px;
+  }
+
+  .enter-btn {
+    background: #ff69b4;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-weight: 600;
+  }
+
+  .enter-btn:hover {
+    transform: scale(1.1);
+  }
+
+  </style>
+
+  <script>
+    const cards = document.querySelectorAll('.calendar .card');
+    const noteBox = document.getElementById('noteBox');
+    const noteText = document.getElementById('noteText');
+    const enterBtn = document.getElementById('enterBtn');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        noteText.textContent = card.dataset.note;
+        noteBox.classList.remove('hidden');
+
+        // Show Enter button ONLY for enter cards
+        if (card.classList.contains('enter-card')) {
+          enterBtn.classList.remove('hidden');
+          enterBtn.onclick = () => {
+            window.location.href = "prepare.html";
+          };
+        } else {
+          enterBtn.classList.add('hidden');
+        }
+      });
+    });
+
+    function closeNote() {
+      noteBox.classList.add('hidden');
+    }
+  </script>
+
+
+    <!-- PREPARING PAGE -->
+    <div id="preparing" class="container hidden">
+      <h2>Preparing 💌</h2>
+      <div class="chat-container">
+        <div class="blue-bubble">Hahaha sorry, first time asking a girl out 😳 Never done this before… first-timer energy all over me 😅<br>I'm curious… what do you want us to do on our date?</div>
+      </div>
+      <div class="heart-btn" onclick="showHeartText()">❤️</div>
+    </div>
+
+    <!-- HEART TEXT PAGE -->
+    <div id="heartText" class="container hidden">
+      <h2>For you, Myvien ❤️</h2>
+      <p>Type in our Messenger conversation using Pink, and you’ll see some cringey, first-time ‘maderpaker’ vibes — like me trying to make a flower for someone for the first time 😅💐</p>
+    </div>
+
+    <script>
+      function goToAsking() {
+        document.getElementById('home').classList.add('hidden');
+        document.getElementById('asking').classList.remove('hidden');
+      }
+
+      function chooseYes() {
+        document.getElementById('asking').classList.add('hidden');
+        document.getElementById('scheduling').classList.remove('hidden');
+      }
+
+      function chooseNo() {
+        alert("It's okay 😊 I still think you're amazing!");
+      }
+
+      function openPrepare() {
+        document.getElementById('scheduling').classList.add('hidden');
+        document.getElementById('prepare').classList.remove('hidden');
+      }
+
+      function pinkReplyYes() {
+        const chat = document.getElementById('chat');
+        const blueReply = document.createElement('div');
+        blueReply.className = 'blue-bubble';
+        blueReply.innerHTML = "We di ngaa? 😍 That makes me really happy ❤️ Can't wait for us!";
+        chat.appendChild(blueReply);
+        document.getElementById('prepare').querySelectorAll('button').forEach(btn => btn.style.display = 'none');
+
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = "Next ❤️";
+        nextBtn.style.marginTop = "20px";
+        nextBtn.onclick = () => {
+          document.getElementById('prepare').classList.add('hidden');
+          document.getElementById('preparing').classList.remove('hidden');
+        }
+        document.getElementById('prepare').appendChild(nextBtn);
+      }
+
+      function pinkReplyNo() {
+        alert("Oh… that's okay 😊 Still amazing!");
+      }
+
+      function showHeartText() {
+        document.getElementById('preparing').classList.add('hidden');
+        document.getElementById('heartText').classList.remove('hidden');
+      }
+    </script>
+
+  </body>
+  </html>

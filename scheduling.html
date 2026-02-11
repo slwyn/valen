@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Sched 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    * { box-sizing: border-box; margin:0; padding:0; font-family: 'Poppins', sans-serif; }
+
+    body, html {
+      width:100%;
+      height:100%;
+      background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+      overflow-x:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position: relative;
+    }
+
+    .container {
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      align-items:center;
+      min-height:100vh;
+      text-align:center;
+      color:white;
+      padding:20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h2 { margin-bottom: 20px; }
+
+    .calendar {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+      margin-top:20px;
+    }
+
+    .card {
+      background:white;
+      color:#FF69B4;
+      padding:15px 20px;
+      border-radius:15px;
+      width:180px;
+      text-align:center;
+      cursor:pointer;
+      transition: all 0.3s ease;
+      box-shadow:0 5px 15px rgba(255,105,180,0.3);
+      font-weight:600;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      background: #FF69B4;
+      color:white;
+    }
+
+    /* Popup */
+    .note-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+      padding: 25px 35px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      color: white;
+      width: 320px;
+      text-align: center;
+      animation: popIn 0.3s ease forwards;
+      z-index: 10;
+      display:none;
+    }
+
+    .note-box button {
+      margin-top: 10px;
+      padding: 8px 18px;
+      border:none;
+      border-radius: 10px;
+      background:white;
+      color:#FF69B4;
+      font-weight:600;
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+
+    .note-box button:hover { transform: scale(1.1); }
+
+    @keyframes popIn {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity:0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity:1; }
+    }
+
+    .enter-btn, .next-btn {
+      background: #FF1493;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 15px;
+      cursor: pointer;
+      margin-right: 8px;
+      font-weight: 600;
+    }
+
+    .enter-btn:hover, .next-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Heart falling animation */
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: fall 5s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-50px) rotate(0deg); opacity:1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Exam vs Date sched 💌</h2>
+
+  <div class="calendar">
+    <div class="card" data-note="Looks like we’re both busy all day Saturday. Want to do ice cream on Friday instead? Message me!">Feb 13 ❤️ - Friday</div>
+    <div class="card" data-note="ohhh valentines… let me cook na lang puntahan kita after class chat me what time iiwan ko mga panelist ko
+
+ 😏">Feb 14 ❤️ - Saturday</div>
+    <div class="card" data-note="Hmmmm sudden sidequest and prepare for exam sunday? 😳">Feb 15 ❤️ - Sunday</div>
+    <div class="card" data-note="11:00-5:30pm exam week kainis and do you have morning class also diba?">Feb 16 ❤️ - Monday</div>
+    <div class="card" data-note="Pwedeee kaso you have afternoon sched">Feb 17 ❤️ - Tuesday</div>
+    <div class="card" data-note="Exam sched can be 2:00-6:00pm">Feb 18 ❤️ - Wednesday</div>
+    <div class="card" data-note="Whole sched kainiis wag na kaya me mag aral mag sugal na langg">Feb 19 ❤️ - Thursday</div>
+    <div class="card" data-note="Match sched but you’ve got cooking class on Saturday, right? I figured you'd need the day to prepare things">Feb 20 ❤️ - Friday Final Matchup</div>
+    <!-- New card after exam week -->
+    <div class="card" data-note="Since it's exam week, let's wait until we're finished so we can properly enjoy each other's company  💖">After our exam week?</div>
+  </div>
+
+  <!-- POPUP -->
+  <div id="noteBox" class="note-box">
+    <p id="noteText"></p>
+    <div class="note-actions">
+      <button id="enterBtn" class="enter-btn">Enter 💖</button>
+      <button id="nextBtn" class="next-btn" style="display:none;">Sure ➡️</button>
+      <button onclick="closeNote()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const cards = document.querySelectorAll('.calendar .card');
+  const noteBox = document.getElementById('noteBox');
+  const noteText = document.getElementById('noteText');
+  const enterBtn = document.getElementById('enterBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      noteText.textContent = card.dataset.note;
+      noteBox.style.display = 'block';
+
+      // ALL cards can now enter
+      enterBtn.style.display = 'inline-block';
+      nextBtn.style.display = 'none';
+
+      enterBtn.onclick = () => {
+        enterBtn.style.display = 'none';
+        nextBtn.style.display = 'inline-block';
+      };
+
+      nextBtn.onclick = () => {
+        window.location.href = 'prepare.html';
+      };
+    });
+  });
+
+  function closeNote() {
+    noteBox.style.display = 'none';
+    enterBtn.style.display = 'inline-block';
+    nextBtn.style.display = 'none';
+  }
+
+  // Heart falling animation
+  function createHearts() {
+    const colors = ['#FF69B4', '#FF1493', '#FFB6C1', '#FFC0CB'];
+    for(let i=0; i<30; i++){
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random()*5) + 's';
+      heart.style.fontSize = (15 + Math.random()*20) + 'px';
+      heart.style.color = colors[Math.floor(Math.random()*colors.length)];
+      document.body.appendChild(heart);
+    }
+  }
+  createHearts();
+</script>
+
+</body>
+</html>

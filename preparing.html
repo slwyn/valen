@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Preparing</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="chat-box">
+        <div class="chat-msg blue-msg" id="chat1"></div>
+        <div class="chat-msg blue-msg" id="chat2"></div>
+        <div class="chat-msg blue-msg" id="chat3"></div>
+    </div>
+    <button class="heart-button" onclick="alert('Type in our Messenger conversation using Pink, and you’ll see cringey first-time “maderpaker” vibes 😅💐')">💖 For you, Myvien 💖</button>
+</div>
+
+<script>
+typeMessage('chat1', "Hahaha sorry, firsttimer asking a girl out 😳", 70, () => {
+    typeMessage('chat2', "Never done this before, never dated anyone and now nervously typing “You sure do you want to go out with me?”", 80, () => {
+        typeMessage('chat3', "First-timer energy all over me 😅\nI’m curious… what do you want us to do on our date?", 100);
+    });
+});
+</script>
+</body>
+</html>
+
